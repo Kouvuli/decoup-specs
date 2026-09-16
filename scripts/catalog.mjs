@@ -24,6 +24,7 @@ const surfaces = {
 };
 const guides = [
   'docs/shared-brand-native-ui.md',
+  'docs/impeccable-command-flows.md',
   'docs/workflow.md',
   'docs/format-choice.md',
   'docs/authoring.md',

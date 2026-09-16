@@ -4,8 +4,8 @@ title: "From a product decision to a Trello ticket"
 scope: shared
 status: reference
 summary: "From agreed scope to reviewed specifications and repo-owned Trello tickets."
-revision: 5
-updated: "2026-09-10"
+revision: 7
+updated: "2026-09-16"
 ---
 
 # Decide → Epic → Feature → approve → ticket
@@ -18,11 +18,11 @@ updated: "2026-09-10"
 | decoup-web | `$decoup-fe-to-spec` | `$decoup-fe-to-ticket` |
 | decoup-mb | `$decoup-mb-to-spec` | `$decoup-mb-to-ticket` |
 
-These are project-owned adaptations of Matt Pocock's spec/ticket disciplines. They do not edit or automatically invoke his user-only orchestration skills. Mobile now has 21 unchanged Matt Pocock skills plus four project-owned skills and a React Native + Expo + TypeScript scaffold. Web-only design providers remain in decoup-web. Repo folder renames do not change skill command names, spec scope directories or stable spec IDs. Existing reader bookmarks using the former repository names resolve to the renamed repositories.
+These are project-owned adaptations of Matt Pocock's spec/ticket disciplines. They do not edit or automatically invoke his user-only orchestration skills. Web and mobile share SkillUI evidence extraction followed by Impeccable design work; mobile then uses Expo guidance for native implementation and validation. Repo folder renames do not change skill command names, spec scope directories or stable spec IDs. Existing reader bookmarks using the former repository names resolve to the renamed repositories.
 
 ## Source of truth
 
-For visual work, follow [Shared brand, native mobile UI](shared-brand-native-ui.md). Mobile additionally has three Expo skills (28 total): use approved shared brand decisions, then native-specific planning/implementation and device evidence. The guide includes prompts and uninstalled dependency gates; web providers remain web-only.
+For visual work, follow [Shared brand, native mobile UI](shared-brand-native-ui.md) and the [Impeccable command examples](impeccable-command-flows.md). Optional SkillUI evidence feeds Impeccable in either client; mobile then applies the approved intent through Expo guidance and real native/device evidence. The guides keep DOM/CSS evidence separate from React Native implementation and do not turn planning into implementation authority.
 
 Specs live here in `specs/<scope>/<stable-id>.md`, not as full copies in product repos, Confluence, or Trello. Shared behavior/contracts belong to a shared spec linked by the relevant BE/FE/MB specs. Scope-specific details remain in the owner spec.
 
