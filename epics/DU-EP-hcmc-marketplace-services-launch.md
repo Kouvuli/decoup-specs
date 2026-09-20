@@ -3,12 +3,13 @@ id: DU-EP-hcmc-marketplace-services-launch
 title: "DecoUp marketplace and services launch"
 scope: shared
 status: approved
-revision: 3
-approved_revision: 3
-approval_evidence: "User approved revision 3 and its testing seams in conversation on 2026-09-10."
-updated: "2026-09-10"
+revision: 4
+approved_revision: 4
+approval_evidence: "User approved the exact shared Feature revision 1 and launch Epic revision 4 in conversation on 2026-09-20."
+updated: "2026-09-20"
 features:
   - DU-SH-account-capabilities
+  - DU-SH-brand-visual-language
   - DU-SH-marketplace-transaction-contract
   - DU-SH-service-booking-contract
   - DU-BE-marketplace-order-lifecycle
@@ -33,6 +34,7 @@ DecoUp is intended for worldwide use. The first operational rollout remains Ho C
 ## Features
 
 - [Account capabilities](../specs/shared/DU-SH-account-capabilities.md)
+- [DecoUp visual language](../specs/shared/DU-SH-brand-visual-language.md)
 - [Marketplace transaction contract](../specs/shared/DU-SH-marketplace-transaction-contract.md)
 - [Service lead contract](../specs/shared/DU-SH-service-booking-contract.md)
 - [Backend marketplace Order lifecycle](../specs/backend/DU-BE-marketplace-order-lifecycle.md)
@@ -65,6 +67,8 @@ After month four, approve numerical expansion thresholds from the observed basel
 
 ## Revision History
 
+- Revision 4 approval: User approved the exact launch breakdown on 2026-09-20; status promoted without changing requirements.
+- Revision 4: Added the shared visual-language Feature to the launch breakdown; revision 3 approval remains historical and does not approve this change.
 - Revision 3 approval: User approved the exact revision and testing seams on 2026-09-10; status promoted without changing requirements.
 - Revision 3: Resolved the launch interview: four-month baseline, service lead-generation model, Free/Pro provider plans, marketplace protection rules, shared identity policy, backend boundaries, and mobile requirements. Service IDs remain stable although Booking is no longer a launch concept; not approved.
 - Revision 2: Reframed DecoUp as worldwide with Ho Chi Minh City as the first rollout; confirmed launch measurement, shared-account capabilities, and the first shared/backend/mobile Feature set. The stable Epic ID remains unchanged to preserve references; not approved.

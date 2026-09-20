@@ -3,18 +3,19 @@ id: DU-SH-service-booking-contract
 title: "Service lead contract"
 scope: shared
 surface: shared
-status: approved
-revision: 2
-approved_revision: 2
-approval_evidence: "User approved revision 2 and its testing seams in conversation on 2026-09-10."
-updated: "2026-09-10"
+status: draft
+revision: 3
+approved_revision: null
+approval_evidence: null
+updated: "2026-09-19"
 epic: DU-EP-hcmc-marketplace-services-launch
 related:
   - DU-SH-account-capabilities
+  - DU-SH-marketplace-transaction-contract
   - DU-BE-service-booking-lifecycle
   - DU-FE-service-booking-launch
   - DU-MB-service-booking-launch
-summary: "Shared behavior for Service Offerings, qualified Requests, accepted Leads, Provider plans, external contact, outcomes, and Reviews."
+summary: "Shared behavior for Service Offerings, Provider room ideas, qualified Requests, accepted Leads, plans, outcomes, and Reviews."
 ---
 
 # Service lead contract
@@ -25,7 +26,7 @@ Independent Service Providers need qualified customer leads without requiring De
 
 ## Scope
 
-Define shared launch behavior for home-decoration service discovery and lead generation. DecoUp is intended worldwide; Ho Chi Minh City is the first operational region. The stable ID/path retains its historical `service-booking` slug for reference compatibility, but managed Booking is not a launch concept. PC-assembly services are deferred.
+Define shared launch behavior for home-decoration inspiration, service discovery, and lead generation. DecoUp is intended worldwide; Ho Chi Minh City is the first operational region. The stable ID/path retains its historical `service-booking` slug for reference compatibility, but managed Booking is not a launch concept. PC-assembly services are deferred.
 
 ## User Stories
 
@@ -49,6 +50,14 @@ As a participant, I can record whether the accepted lead resulted in contact, hi
 
 As a Customer, I can review completed work originating from an accepted DecoUp lead, while the Provider can respond publicly.
 
+### US-06 — Share a room idea
+
+As a Service Provider, I can publish a before-and-after room idea linked to one of my Service Offerings.
+
+### US-07 — Act on a room idea
+
+As a User, I can inspect the linked Service Offering or separately inspect Seller Listings associated with the room idea.
+
 ## Decisions and Contracts
 
 - A Service Offering uses a fixed package with defined scope, an assumption-based range, or `quote required`. Bare starting prices and `open to offers` are prohibited at launch.
@@ -64,10 +73,13 @@ As a Customer, I can review completed work originating from an accepted DecoUp l
 - Service Provider verification follows `DU-SH-account-capabilities`; verification never guarantees service quality.
 - A Customer may Review within 30 days after marking an accepted lead completed and edit once within seven days. The Provider may post one public response and edit it within seven days. Either party may report abuse; removed Reviews no longer affect ratings.
 - Service Reviews are labelled `Verified DecoUp lead`, not verified transaction, and remain separate from marketplace Reviews. Customers do not receive public ratings at launch.
+- An activated Service Provider may publish a room idea with before and after photos and a link to one of their active Service Offerings. A Provider without an active Offering creates one before publishing an idea. Video is outside launch scope.
+- A room idea may reference relevant marketplace Listings. Each linked Listing retains its Seller attribution, price, availability, and marketplace actions; the Provider does not become its Seller. The linked Offering retains its own scope and pricing basis, and any Service Request still targets that selected Provider and Offering.
+- Room ideas can appear in shared discovery and search. Their publication requires an approved media-rights and moderation policy; a pictured result does not guarantee the same result for another Customer.
 
 ## High-Level Design
 
-The shared sequence is Service Offering → selected-Provider qualified Service Request → redacted Provider review → accepted Lead/contact exchange → external negotiation/work/payment → recorded outcome → eligible Review. Provider-plan entitlement controls lead acceptance and sponsored placement; it does not control organic trust or imply a managed service transaction.
+The shared sequence is Service Offering → optional room idea → selected-Provider qualified Service Request → redacted Provider review → accepted Lead/contact exchange → external negotiation/work/payment → recorded outcome → eligible Review. A room idea can also lead to separate Seller Listings without changing their marketplace ownership. Provider-plan entitlement controls lead acceptance and sponsored placement; it does not control organic trust or imply a managed service transaction.
 
 ## Low-Level Design
 
@@ -79,10 +91,11 @@ The shared sequence is Service Offering → selected-Provider qualified Service 
 - Pricing complaints preserve the request-time Offering snapshot plus scoped Customer and Provider evidence.
 - Review eligibility requires an accepted lead marked hired and completed; the contract exposes its deadline, edit state, public response, report, and moderation result.
 - Region-specific verification, public-profile, retention, and moderation policy remains explicit in contracts rather than inferred by clients.
+- Idea publication checks the active Provider Profile, the linked Offering's ownership and eligibility, both approved photos, and any optional Listing references. Removing or making a linked Listing unavailable never changes an existing marketplace Order or Service Request.
 
 ## Data Modelling
 
-Services owns Service Offering, pricing mode/snapshot, Service Request, accepted Lead, lead allowance usage/restoration, Lead Outcome, Provider Plan/Subscription state, pricing complaint, service Review, and public response. Identity owns accounts, contact verification, and Provider verification. Media owns secured images/evidence; Chat owns messages; Payment may process the Pro subscription but owns no service-work transaction. Cross-owner relationships use stable IDs and minimal projections.
+Services owns Service Offering, room idea and its Offering/Listing references, pricing mode/snapshot, Service Request, accepted Lead, lead allowance usage/restoration, Lead Outcome, Provider Plan/Subscription state, pricing complaint, service Review, and public response. Marketplace retains ownership of referenced Listings. Identity owns accounts, contact verification, and Provider verification. Media owns secured images/evidence; Chat owns messages; Payment may process the Pro subscription but owns no service-work transaction. Cross-owner relationships use stable IDs and minimal projections.
 
 ## Acceptance Criteria
 
@@ -96,6 +109,9 @@ Services owns Service Offering, pricing mode/snapshot, Service Request, accepted
 - AC-08 (US-01): Pricing complaints compare against the immutable Offering snapshot and allow evidence from both parties before progressive enforcement.
 - AC-09 (US-05): One eligible completed Lead permits one Review within 30 days, one seven-day Customer edit, and one seven-day editable Provider response.
 - AC-10 (US-05): Service Reviews are labelled as verified leads, not verified transactions, and removed Reviews no longer affect Provider ratings.
+- AC-11 (US-06): Only an activated Provider with an active Offering and valid before/after photos can publish a room idea; no video is required or accepted at launch.
+- AC-12 (US-07): An idea shows its Provider and linked Offering separately from any linked Seller Listings, preserving each Seller's attribution and live Listing state.
+- AC-13 (US-07): A Request from an idea still captures the selected Offering's pricing snapshot and follows the qualified lead lifecycle; a linked Listing uses the marketplace purchase path.
 
 ## Testing
 
@@ -103,6 +119,7 @@ Services owns Service Offering, pricing mode/snapshot, Service Request, accepted
 - Contract tests cover duplicate/stale actions, unauthorized contact access, allowance races, invalid-request credits, pricing complaint evidence, moderation appeal, and removed-rating recalculation.
 - Security tests cover public contact leakage and evidence access.
 - Plan price/allowance fixtures remain configuration inputs; implementation cannot launch provider beta without approved values.
+- Idea examples cover missing Offering, missing photo, ineligible Provider, unavailable linked Listing, distinct Seller/Provider attribution, and navigation to a Request or Listing.
 
 ## Dependencies
 
@@ -110,18 +127,21 @@ Services owns Service Offering, pricing mode/snapshot, Service Request, accepted
 - Account capabilities: `DU-SH-account-capabilities`.
 - Production activation requires approved regional provider verification, privacy, service-advertising, evidence-retention, and moderation policy.
 - Provider beta requires approved Free/Pro prices and lead allowances informed by local research.
+- Room-idea publication requires a backend-owned contract and approved media-rights/moderation policy before implementation; web adoption requires its own scoped revision.
 
 ## Out of Scope
 
 - Managed Bookings, in-app service Quotes/contracts, deposits, milestones, service-work payments, cancellation/refund disputes, Provider payouts, completion commission, Customer platform fees, Premium plans, and pay-per-extra-lead charging.
 - Open provider bidding, marketplace Price Offers, PC assembly, generic display ads, concrete endpoints/schemas, vendor selection, and country-expansion policy.
+- Video/audio ideas, automatic product recognition, a follow/friend graph, and a separate social-content marketplace.
 
 ## Open Questions
 
-- None.
+- None. Media-rights and moderation approval remains a production dependency above.
 
 ## Revision History
 
+- Revision 3: Draft Provider room ideas linked to an active Offering and optional Seller Listings, with photo-only launch media and separate commerce/service actions. Revision 2 approval remains historical and does not approve this change.
 - Revision 2 approval: User approved the exact revision and testing seams on 2026-09-10; status promoted without changing requirements.
 - Revision 2: Replaced managed Booking with a qualified lead lifecycle; confirmed allowed pricing, Free/Pro trial and conversion, contact disclosure, external transactions, ranking/sponsorship, pricing enforcement, verification, outcomes, and service Review policy. Stable ID retained; not approved.
 - Revision 1: Initial shared service contract linked to the confirmed first owner Features; not approved.
