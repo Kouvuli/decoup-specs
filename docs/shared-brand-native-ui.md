@@ -4,13 +4,15 @@ title: "Shared brand, native mobile UI"
 scope: shared
 status: reference
 summary: "How to reuse approved brand decisions while designing, implementing and checking native mobile UI."
-revision: 1
-updated: "2026-09-07"
+revision: 3
+updated: "2026-09-16"
 ---
 
 # Shared brand, native mobile UI
 
 Use the same approved brand intent on web and mobile, not the same screen code. This page documents the requested workflow; it does not select a palette, font, logo, component library or product feature. No brand specification has been approved by this installation.
+
+For runnable examples covering every Impeccable command, see [Impeccable command flows](impeccable-command-flows.md).
 
 ## What is shared and what is native?
 
@@ -35,7 +37,7 @@ No branding is agreed yet? Use the discovery prompt below and leave decisions op
 
 ## Installed mobile UI skills
 
-All three are unchanged, pinned originals from [Expo](https://github.com/expo/skills). They can be selected during matching authorized work or invoked directly; they do not run continuously. Ownership is recorded separately from Matt's and DecoUp's skills.
+Mobile also has the project-owned `decoup-mb-skillui` adapter and the unchanged Impeccable provider skill described in the flow below. The three native implementation skills are unchanged, pinned originals from [Expo](https://github.com/expo/skills). They can be selected during matching authorized work or invoked directly; they do not run continuously. Ownership is recorded separately from Matt's and DecoUp's skills.
 
 | Skill | Use it for | Dependencies / limits | Read original in mobile repo |
 | --- | --- | --- | --- |
@@ -49,13 +51,13 @@ Runtime packages are separate from instruction files. Installing these skills di
 
 ### Discover and specify
 
-Optional web reference study in decoup-web → draft brand decisions → user approval of shared revision → expo-overview → expo-native-ui + expo-design-system for mobile planning → decoup-mb-to-spec → approve mobile revision → decoup-mb-to-ticket.
+Optional SkillUI reference evidence → Impeccable shape → draft brand decisions → user approval of shared revision → scope-owned to-spec → approve client revision → scope-owned to-ticket.
 
-SkillUI/Hallmark/Impeccable stay in web. Choose one web visual lead; mobile consumes the approved decisions, not extracted CSS or a mandatory chain of redesign tools. Planning guidance does not authorize writing product code.
+Web uses `decoup-fe-skillui`; mobile uses `decoup-mb-skillui`. Both feed reviewed evidence to Impeccable. Mobile then uses expo-overview, expo-native-ui and expo-design-system for native planning/implementation. Hallmark is not part of the flow. Extracted DOM/CSS remains evidence, not React Native code or an approved decision. Planning guidance does not authorize writing product code.
 
 ### Implement and validate
 
-Explicit implementation request for an approved ticket → implement + tdd → expo-overview → native-ui/design-system as needed → code-review + native evidence → report remaining gaps.
+Explicit implementation request for an approved ticket → implement + tdd with Impeccable design direction → mobile additionally routes through expo-overview/native-ui/design-system → code-review + platform evidence → report remaining gaps.
 
 Mobile shared UI stays behind `src/shared/ui/index.ts`; one future theme belongs within that shared UI area, not a second upstream-example folder. Private feature views remain in their owning `src/modules/<domain>/internal/`; the app shell composes public module entrypoints. Build only components justified by real features.
 
@@ -71,6 +73,14 @@ the mobile UI for the feature we discussed. Read the shared brand
 spec if one exists; otherwise list open brand decisions for my review.
 Reuse approved intent, but account for iOS and Android behavior.
 Do not add runtime packages, screens or a navigation system yet.
+```
+
+When a specific reference is supplied, prepend:
+
+```text
+Use $decoup-mb-skillui to extract bounded evidence from <source>, then
+use $impeccable shape <surface> to adapt it for native UX. Do not copy
+DOM/CSS or treat the reference as an approved brand specification.
 ```
 
 **Mobile — create the canonical specification:**
@@ -116,4 +126,4 @@ and record differences from mobile. Do not copy native components.
 
 ## Read, customize and update
 
-The mobile [Agent Skills Guide](../../decoup-mb/docs/AGENT_SKILLS_GUIDE.md) gives exact paths and outputs. Read supporting references beside each SKILL.md. Keep Expo originals unchanged; create a separately named project-owned adaptation if customization is needed. Review Expo updates separately using its pinned external source registry; the Matt updater must not overwrite Expo skills. No automatic feedback submission, telemetry, plugin/MCP setup, cloud build or publication is enabled.
+The mobile [Agent Skills Guide](../../decoup-mb/docs/AGENT_SKILLS_GUIDE.md) gives exact paths and outputs. Read supporting references beside each SKILL.md. Keep Impeccable and Expo originals unchanged; customize project-owned adapters separately. Review provider updates through the pinned external source registry; the Matt updater must not overwrite them. No automatic SkillUI extraction, engine acquisition, hooks, feedback submission, telemetry, plugin/MCP setup, cloud build or publication is enabled.

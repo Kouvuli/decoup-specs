@@ -1,5 +1,9 @@
 # Local setup verification
 
+## Impeccable + SkillUI flow — 2026-09-16
+
+Current source inventories are web 27, backend 25 and mobile 30. Hallmark was removed from web. Web and mobile now route optional SkillUI reference evidence into Impeccable; mobile keeps Expo as the native implementation and device-validation layer. Six guides include runnable examples for all 24 Impeccable command names. The SkillUI CLI and Impeccable runtime capabilities remain deferred, and no product UI, dependency, hook or global skill was installed by this flow update. The dated sections below are historical snapshots.
+
 ## Shared brand / native UI guide — 2026-09-07
 
 Checks passed: catalog/TypeScript, targeted source lint, reader build, mobile type/import checks and HTTP 200 smoke requests for the new guide and raw Expo skill. Guide navigation uses the existing local state/history handler. Browser interactions and native/device behavior were not tested. Existing nonblocking Vinext build warnings remain; the temporary preview server was stopped after validation.
