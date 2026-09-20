@@ -279,6 +279,8 @@ function Skills({
               </p>
             )}
             {repository.short === 'mb' &&
+              has('decoup-mb-skillui') &&
+              has('impeccable') &&
               has('expo-overview') &&
               has('expo-native-ui') &&
               has('expo-design-system') && (
@@ -287,6 +289,8 @@ function Skills({
                     title="Mobile UI planning · shared brand, native interpretation"
                     repository={repository}
                     steps={[
+                      ['decoup-mb-skillui'],
+                      ['impeccable shape'],
                       ['Approved shared brand revision or open decisions'],
                       ['expo-overview'],
                       ['expo-native-ui', 'expo-design-system'],
@@ -300,6 +304,7 @@ function Skills({
                     repository={repository}
                     steps={[
                       ['Approved ticket', 'implement', 'tdd'],
+                      ['impeccable'],
                       ['expo-overview'],
                       ['expo-native-ui', 'expo-design-system'],
                       ['code-review'],
@@ -307,7 +312,9 @@ function Skills({
                     ]}
                   />
                   <p>
-                    Reuse approved brand intent, not web components or CSS.
+                    SkillUI evidence feeds Impeccable; it is not native code or
+                    an approved brand decision. Reuse approved intent, not web
+                    components or CSS.
                     expo-ui and expo-router are not installed: review missing
                     skill and runtime dependencies before work needing them.
                     Screenshots from a browser and Metro exports do not prove
@@ -353,14 +360,13 @@ function Skills({
             )}
             {repository.short === 'fe' &&
               has('decoup-fe-skillui') &&
-              has('hallmark') &&
               has('impeccable') && (
                 <>
                   <Flow
                     title="FE design discovery · optional reference study before specification"
                     repository={repository}
                     steps={[
-                      ['decoup-fe-skillui', 'hallmark study'],
+                      ['decoup-fe-skillui'],
                       ['impeccable shape'],
                       ['decoup-fe-to-spec'],
                       ['Review & approve revision'],
@@ -368,24 +374,22 @@ function Skills({
                     ]}
                   />
                   <Flow
-                    title="FE visual delivery · choose one visual lead, review only what is needed"
+                    title="FE visual delivery · Impeccable design direction"
                     repository={repository}
                     steps={[
                       ['Explicit implementation request', 'implement', 'tdd'],
-                      ['hallmark', 'impeccable'],
-                      ['hallmark audit', 'impeccable audit'],
+                      ['impeccable'],
+                      ['impeccable audit', 'impeccable critique'],
                       ['Approved refinements', 'impeccable polish'],
                       ['code-review'],
                     ]}
                   />
                   <p>
-                    SkillUI extraction and Hallmark study are alternatives, not
-                    required consecutive steps. Choose Hallmark or Impeccable as
-                    the visual lead. SkillUI CLI execution and Impeccable
-                    engine, hooks and live tools are not activated by this
-                    installation. Command variants link to their owning skill
-                    below; arrows do not authorize implementation or run manual
-                    planning skills.
+                    SkillUI is optional evidence gathering; Impeccable owns the
+                    design workflow. SkillUI CLI execution and Impeccable engine,
+                    hooks and live tools are not activated by this installation.
+                    Command variants link to their owning skill below; arrows do
+                    not authorize implementation or run manual planning skills.
                   </p>
                 </>
               )}
